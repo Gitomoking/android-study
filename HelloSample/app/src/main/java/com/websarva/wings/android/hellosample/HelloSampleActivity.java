@@ -21,6 +21,11 @@ public class HelloSampleActivity extends AppCompatActivity {
         HelloListener listener = new HelloListener();
         // 表示ボタンにリスナを設定
         btClick.setOnClickListener(listener);
+
+        // クリア Button オブジェクトを取得
+        Button btClear = findViewById(R.id.btClear);
+        // クリアボタンにリスナを設定
+        btClear.setOnClickListener(listener);
     }
 
     // ボタンクリックのリスナクラス
@@ -32,10 +37,27 @@ public class HelloSampleActivity extends AppCompatActivity {
             EditText input = findViewById(R.id.etName);
             // メッセージを表示する TextView オブジェクトを取得
             TextView output = findViewById(R.id.tvOutput);
-            // 入力された名前文字列を取得
-            String inputStr = input.getText().toString();
-            // メッセージを表示
-            output.setText(inputStr + "さん、こんにちは！");
+
+            // タップされた画面部品の id の R 値を取得
+            int id = view.getId();
+            // id の R 値に応じて処理を分岐
+            switch(id) {
+                // 表示ボタンの場合
+                case R.id.btClick:
+                    // 入力された名前文字列を取得
+                    String inputStr = input.getText().toString();
+                    // メッセージを表示
+                    output.setText(inputStr + "さん、こんにちは！");
+                    break;
+                // クリアボタンの場合
+                case R.id.btClear:
+                    // 名前入力欄を空文字に設定
+                    input.setText("");
+                    // メッセージ表示欄を空文字に設定
+                    output.setText("");
+                    break;
+            }
+
         }
     }
 }
