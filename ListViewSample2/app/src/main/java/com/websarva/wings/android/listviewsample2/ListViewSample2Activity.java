@@ -2,6 +2,8 @@ package com.websarva.wings.android.listviewsample2;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -39,5 +41,19 @@ public class ListViewSample2Activity extends AppCompatActivity {
 
         // Set Adapter object to ListView
         lvMenu.setAdapter(adapter);
+
+        // Set Listener to ListView
+        lvMenu.setOnItemClickListener(new ListItemClickListener());
+    }
+
+    // Member class that describe behavior when the list is tapped
+    private class ListItemClickListener implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            // Create Dialog object
+            OrderConfirmDialogFragment dialogFragment = new OrderConfirmDialogFragment();
+            // Show Dialog
+            dialogFragment.show(getSupportFragmentManager(), "OrderConfirmDialogFragment");
+        }
     }
 }
